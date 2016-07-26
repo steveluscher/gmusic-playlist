@@ -201,7 +201,7 @@ library = load_personal_library()
 
 # begin searching for the tracks
 log('===============================================================')
-log(u'Searching for songs from: '+playlist_name)
+log(u'Searching for songs from: `'+playlist_name + '`')
 log('===============================================================')
 
 
@@ -297,8 +297,19 @@ for track in tracks:
 
 total_time = time.time() - start_time
 
+if import_to is 'library_and_playlist':
+    import_target = 'playlist `' + playlist_name + '` and your music library'
+elif import_to is 'playlist':
+    import_target = 'playlist `' + playlist_name + '`'
+else:
+    import_target = 'your music library'
 log('===============================================================')
-log(u'Adding '+str(len(song_ids))+' found songs to: '+playlist_name)
+log(
+    u'Adding ' +
+    str(len(song_ids)) +
+    ' found songs to ' +
+    import_target,
+)
 log('===============================================================')
 
 # add the songs to the playlist(s)
@@ -317,10 +328,32 @@ while current_playlist <= total_playlists_needed:
     current_songs = song_ids[current_playlist_index :
                              current_playlist_index + max_playlist_size]
 
-    added_songs = api.add_songs_to_playlist(playlist_id,current_songs)
+    if import_to is 'playlist' or import_to is 'library_and_playlist':
+        songs_added_to_playlist = api.add_songs_to_playlist(
+            playlist_id,
+            current_songs,
+        )
+        log(
+            u' + ' +
+            current_playlist_name +
+            u' - ' +
+            str(len(songs_added_to_playlist)) +
+            u'/' +
+            str(len(current_songs)) +
+            ' songs',
+        )
 
-    log(u' + '+current_playlist_name+u' - '+str(len(added_songs))+
-        u'/'+str(len(current_songs))+' songs')
+    if import_to is 'library' or import_to is 'library_and_playlist':
+        songs_added_to_library = (
+            [api.add_store_track(song_id) for song_id in current_songs]
+        )
+        log(
+            u' + Library - ' +
+            str(len(songs_added_to_library)) +
+            u'/' +
+            str(len(current_songs)) +
+            ' songs',
+        )
 
     # go to the next playlist section
     current_playlist += 1

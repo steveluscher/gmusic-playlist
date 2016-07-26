@@ -36,6 +36,11 @@ search_personal_library = True
 # composer or songwriter for a song instead of a singer.
 search_title_only = True
 
+# You can import to your library, import to a playlist, or both.
+import_to = 'playlist'
+#import_to = 'library'
+#import_to = 'library_and_playlist'
+
 # log high matches in addition to the songs that couldn't be found or had
 # low matches.
 log_high_matches = False
