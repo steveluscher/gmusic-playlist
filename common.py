@@ -7,6 +7,7 @@ __required_gmusicapi_version__ = '10.0.0'
 
 from builtins import str
 from collections import Counter
+from future.utils import iteritems
 from gmusicapi import __version__ as gmusicapi_version
 from gmusicapi import Mobileclient
 from gmusicapi.exceptions import CallFailure
@@ -114,7 +115,7 @@ def get_google_track_details(sample_song = 'one u2'):
 # creates result details from the given track
 def create_result_details(track):
     result_details = {}
-    for key, value in track.iteritems():
+    for key, value in iteritems(track):
         result_details[key] = value
     result_details['songid'] = (track.get('storeId')
         if track.get('storeId') else track.get('id'))
