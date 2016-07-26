@@ -118,11 +118,13 @@ track_count = 0
 duplicates = 0
 
 # score the match against the query
-def score_track(details,result_details,top_score = 200):
+def score_track(details,result_details,top_score=None):
     global low_scores
     global low_titles
     global low_artists
     global duplicates
+
+    if not top_score: top_score = 200
 
     # check for low quality matches
     result_score = u' + '
