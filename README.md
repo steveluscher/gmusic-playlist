@@ -3,10 +3,18 @@ gmusic-playlist
 
 playlist scripts for gmusic
 
-## Prerequisites
+## Dependencies
 
-- python 2.7 - https://www.python.org
+- python v2.7 or v3.x - https://www.python.org
+- future - https://pypi.python.org/pypi/future
 - gmusicapi - https://github.com/simon-weber/Unofficial-Google-Music-API
+
+To install these dependencies using pip, type:
+```
+pip install -r requirements.txt
+```
+
+## Configuration
 
 Before using the scripts, open up the preferences.py file and change the username.
 
